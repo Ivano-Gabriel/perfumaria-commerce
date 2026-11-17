@@ -1,0 +1,8 @@
+'use client';
+import Link from 'next/link';
+import {useState} from 'react';
+import {useCart} from './CartProvider';
+export function Header(){
+ const {count,setOpen}=useCart();const [mobileOpen,setMobileOpen]=useState(false);
+ return <><div className="topbar"><span>Uma nova experiência em fragrâncias está chegando</span><span>Conheça, descubra, sinta.</span></div><header className="site-header"><div className="header-inner"><Link className="logo" href="/" aria-label="Página inicial"><span className="logo-monogram">S<span>•</span>M</span><span className="logo-words">SUA MARCA<small>PERFUMARIA</small></span></Link><nav className={`desktop-nav ${mobileOpen?'open':''}`} aria-label="Navegação principal"><Link onClick={()=>setMobileOpen(false)} href="/#catalogo">Catálogo</Link><Link onClick={()=>setMobileOpen(false)} href="/#colecoes">Coleções</Link><Link onClick={()=>setMobileOpen(false)} href="/#origem">Nossa essência</Link><Link onClick={()=>setMobileOpen(false)} href="/#guia">Escolha sua fragrância</Link></nav><div className="header-actions"><a href="/#catalogo" className="header-search" aria-label="Ver catálogo">⌕</a><button className="bag-button" aria-label={`Abrir carrinho com ${count} itens`} onClick={()=>setOpen(true)}><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.7"><path d="M4 8h16l-1.2 12H5.2L4 8Z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/></svg><span className="bag-count">{count}</span></button><button className="mobile-menu" aria-label={mobileOpen?'Fechar menu':'Abrir menu'} aria-expanded={mobileOpen} onClick={()=>setMobileOpen(v=>!v)}>{mobileOpen?'✕':'☰'}</button></div></div></header></>
+}
